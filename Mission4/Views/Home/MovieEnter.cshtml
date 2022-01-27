@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "MovieEnter";
+}
+@model Mission4.Models.MovieEntry
+
+<h1>MovieEnter</h1>
+<p>@ViewBag.message</p>
+<div>
+    <form style="width: 30%;" method="post" asp-action="SubmitForm" asp-controller="Home">
+        Category <input asp-for="Category" class="form-control" required/><br />
+        Title <input asp-for="Title" class="form-control" required/><br />
+        Year <input asp-for="Year" class="form-control" required/><br />
+        Director <input asp-for="Director" class="form-control" required/><br />
+        Rating <select asp-for="Rating" class="form-control" required>
+                    <option value="G">G</option>
+                    <option value="PG">PG</option>
+                    <option value="PG-13">PG-13</option>
+                    <option value="R">R</option>
+               </select><br />
+        Edited <input asp-for="Edited" class="form-control"/><br />
+        Lent To <input asp-for="LentTo" class="form-control"/><br />
+        Notes <input asp-for="Notes" class="form-control" maxlength="25"/><br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
