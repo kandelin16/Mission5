@@ -152,3 +152,4 @@ C:\Users\Kyle\source\repos\Mission4\Mission4\bin\Debug\netcoreapp3.1\runtimes\wi
 C:\Users\Kyle\source\repos\Mission4\Mission4\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\Kyle\source\repos\Mission4\Mission4\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Kyle\source\repos\Mission4\Mission4\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Kyle\source\repos\Mission4\Mission4\obj\Debug\netcoreapp3.1\Razor\Views\Home\MovieList.cshtml.g.cs

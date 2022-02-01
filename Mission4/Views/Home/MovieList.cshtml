@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "MovieList";
+
+}
+@Model Mission4.Models.MovieEntry
+
+<h1>Movie List</h1>
+<form method="post" id="deleteForm" asp-action="DeleteMovie" asp-controller="Home">
+    <input type="hidden" name="movieID" id="movieID"/>
+</form>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Rating</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    @foreach (var movie in ViewBag.movies)
+    {
+        <tr >
+            <td>@movie.Title</td>
+            <td>Category</td>
+            <td>@movie.Year</td>
+            <td>@movie.Director</td>
+            <td>@movie.Rating</td>
+            <td onclick="deleteMovie(@movie.EntryID, @movie.Title);">❌</td>
+        </tr>
+    } 
+</table>

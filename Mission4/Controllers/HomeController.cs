@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Mission4.Models;
 using System;
@@ -43,6 +44,7 @@ namespace Mission4.Controllers
         public ActionResult MovieEnter(string message = "")
         {
             ViewBag.message = message;
+            ViewBag.Categories = _dbContext.Categories.ToList();
             return View();
         }
         [HttpPost]
@@ -51,6 +53,19 @@ namespace Mission4.Controllers
             _dbContext.Add(entry);
             _dbContext.SaveChanges();
             return RedirectToAction("MovieEnter", new { message = "Your movie was successfully submitted!" });
+        }
+        public ActionResult MovieList(string message = "")
+        {
+            ViewBag.message = message;
+            ViewBag.movies = _dbContext.MovieEntries.ToList();
+            return View();
+        }
+        public ActionResult DeleteMovie(FormCollection form)
+        {
+            int movieID = Convert.ToInt32(form["movieID"]);
+            _dbContext.Remove(_dbContext.MovieEntries.Where(a => a.EntryID == movieID));
+            _dbContext.SaveChanges();
+            return RedirectToAction("MovieList", new { message = "Your movie was deleted." });
         }
     }
 }

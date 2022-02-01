@@ -7,7 +7,12 @@
 <p>@ViewBag.message</p>
 <div>
     <form style="width: 30%;" method="post" asp-action="SubmitForm" asp-controller="Home">
-        Category <input asp-for="Category" class="form-control" required/><br />
+        Category <select asp-for="CategoryID" class="form-control" required>
+                    @foreach (var cat in ViewBag.Categories)
+                    {
+                        <option value="@cat.CategoryID">@cat.CategoryName</option>
+                    } <br />
+                 </select>
         Title <input asp-for="Title" class="form-control" required/><br />
         Year <input asp-for="Year" class="form-control" required/><br />
         Director <input asp-for="Director" class="form-control" required/><br />

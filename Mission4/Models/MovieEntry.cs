@@ -12,8 +12,6 @@ namespace Mission4.Models
         [Required]
         public int EntryID { get; set; }
         [Required]
-        public string Category { get; set; }
-        [Required]
         public string Title { get; set; }
         [Required]
         public short Year { get; set; }
@@ -26,5 +24,8 @@ namespace Mission4.Models
         public string LentTo { get; set; }
         [MaxLength(25)]
         public string Notes { get; set; }
+        [Required]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
     }
 }
