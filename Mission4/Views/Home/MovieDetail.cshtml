@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Movie Update";
+    List<string> ratings = new List<string>()
+    {
+        "G", "PG", "PG-13", "R"
+    };
+}
+@model Mission4.Models.MovieEntry
+
+<h1>MovieEnter</h1>
+<div>
+    <form style="width: 30%;" method="post" asp-action="SubmitUpdate" asp-controller="Home">
+        Category <select asp-for="CategoryID" class="form-control" required>
+            @foreach (var cat in ViewBag.Categories)
+            {
+                if (cat.CategoryID == ViewBag.movie.CategoryID)
+                {
+                    <option value="@cat.CategoryID" selected>@cat.CategoryName</option>
+                }
+                else
+                {
+                    <option value="@cat.CategoryID">@cat.CategoryName</option>
+                }
+                
+            }
+            
+        </select><br />
+        Title <input asp-for="Title" class="form-control" required value="@ViewBag.movie.Title"/><br />
+        Year <input asp-for="Year" class="form-control" required value="@ViewBag.movie.Year"/><br />
+        Director <input asp-for="Director" class="form-control" required value="@ViewBag.movie.Director"/><br />
+        Rating <select asp-for="Rating" class="form-control" required>
+                    @foreach (string rate in ratings)
+                    {
+                        if (rate == ViewBag.movie.Rating)
+                        {
+                            <option value="@rate" selected>@rate</option>
+                        }
+                        else
+                        {
+                            <option value="@rate">@rate</option>
+                        }
+                    }
+            
+        </select><br />
+        Edited <input asp-for="Edited" class="form-control" value="@ViewBag.movie.Edited"/><br />
+        Lent To <input asp-for="LentTo" class="form-control" value="@ViewBag.movie.LentTo"/><br />
+        Notes <input asp-for="Notes" class="form-control" maxlength="25" value="@ViewBag.movie.Notes"/><br />
+        <input type="hidden" asp-for="EntryID" value="@ViewBag.movie.EntryID" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

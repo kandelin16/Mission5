@@ -2,13 +2,9 @@
     ViewData["Title"] = "MovieList";
 
 }
-@Model Mission4.Models.MovieEntry
 
 <h1>Movie List</h1>
-<form method="post" id="deleteForm" asp-action="DeleteMovie" asp-controller="Home">
-    <input type="hidden" name="movieID" id="movieID"/>
-</form>
-
+<p>@ViewBag.message</p>
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
@@ -17,6 +13,7 @@
             <th>Year</th>
             <th>Director</th>
             <th>Rating</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -24,11 +21,22 @@
     {
         <tr >
             <td>@movie.Title</td>
-            <td>Category</td>
+            <td>@movie.Category.CategoryName</td>
             <td>@movie.Year</td>
             <td>@movie.Director</td>
             <td>@movie.Rating</td>
-            <td onclick="deleteMovie(@movie.EntryID, @movie.Title);">❌</td>
+            <td>
+                <form method="post">
+                    <input type="hidden" value="@movie.EntryID" name="movieID" />
+                    <input type="submit" value="➡" asp-action="MovieDetail" asp-controller="Home" />
+                </form>
+            </td>
+            <td>
+                <form method="post" >
+                    <input type="hidden" value="@movie.EntryID" name="movieID" />
+                    <input type="submit" value="❌" asp-action="DeleteMovie" asp-controller="Home" />
+                </form>
+            </td>
         </tr>
     } 
 </table>

@@ -11,8 +11,8 @@
                     @foreach (var cat in ViewBag.Categories)
                     {
                         <option value="@cat.CategoryID">@cat.CategoryName</option>
-                    } <br />
-                 </select>
+                    } 
+                 </select><br />
         Title <input asp-for="Title" class="form-control" required/><br />
         Year <input asp-for="Year" class="form-control" required/><br />
         Director <input asp-for="Director" class="form-control" required/><br />

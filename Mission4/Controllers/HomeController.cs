@@ -57,15 +57,41 @@ namespace Mission4.Controllers
         public ActionResult MovieList(string message = "")
         {
             ViewBag.message = message;
-            ViewBag.movies = _dbContext.MovieEntries.ToList();
+            List<MovieEntry> movies = _dbContext.MovieEntries.ToList();
+            foreach (MovieEntry movie in movies)
+            {
+                movie.Category = _dbContext.Categories.Where(a => a.CategoryID == movie.CategoryID).First();
+            }
+            ViewBag.movies = movies;
             return View();
         }
-        public ActionResult DeleteMovie(FormCollection form)
+        public ActionResult DeleteMovie(IFormCollection form)
         {
             int movieID = Convert.ToInt32(form["movieID"]);
-            _dbContext.Remove(_dbContext.MovieEntries.Where(a => a.EntryID == movieID));
+            _dbContext.Remove(_dbContext.MovieEntries.Where(a => a.EntryID == movieID).First());
             _dbContext.SaveChanges();
             return RedirectToAction("MovieList", new { message = "Your movie was deleted." });
+        }
+        public ActionResult MovieDetail(IFormCollection form)
+        {
+            MovieEntry movie = _dbContext.MovieEntries.Single(a => a.EntryID == Convert.ToInt32(form["movieID"]));
+            ViewBag.movie = movie;
+            ViewBag.Categories = _dbContext.Categories.ToList();
+            return View();
+        }
+        public ActionResult SubmitUpdate(MovieEntry entry)
+        {
+            MovieEntry movie = _dbContext.MovieEntries.Single(a => a.EntryID == entry.EntryID);
+            movie.Title = entry.Title;
+            movie.CategoryID = entry.CategoryID;
+            movie.Director = entry.Director;
+            movie.Edited = entry.Edited;
+            movie.LentTo = entry.LentTo;
+            movie.Notes = entry.Notes;
+            movie.Rating = entry.Rating;
+            movie.Year = entry.Year;
+            _dbContext.SaveChanges();
+            return RedirectToAction("MovieList", new { message = "Movie Updated" });
         }
     }
 }
